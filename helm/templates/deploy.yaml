@@ -38,4 +38,5 @@ spec:
               port: {{ .Values.readinessProbe.port }}
             initialDelaySeconds: 3
             periodSeconds: 10
-
+      imagePullSecrets:
+         - name: mydockerhubsecret
