@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: techtrends-{{.values.namespace.name}}
+  name: techtrends-{{ .Values.namespace.name }}
   namespace: {{ .Values.namespace.name }}
 spec:
   replicas: {{ .Values.replicaCount }}
@@ -38,5 +38,4 @@ spec:
               port: {{ .Values.readinessProbe.port }}
             initialDelaySeconds: 3
             periodSeconds: 10
-          
 
