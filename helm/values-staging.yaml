@@ -1,18 +1,14 @@
 namespace:
   name: staging
 
-service:
-  port: 5111
-  targetPort: 3111
-  protocol: TCP
-  type: ClusterIP
+replicaCount: 3
 
 image:
   repository: relyonlyurself/first-repo
   tag: latest
   pullPolicy: IfNotPresent
 
-replicaCount: 3
+containerPort: 80
 
 resources:
   requests:
@@ -21,3 +17,12 @@ resources:
   limits:
     memory: 128Mi
     cpu: 500m
+
+livenessProbe:
+  path: /healthz
+  port: 80
+
+readinessProbe:
+  path: /readyz
+  port: 80
+
