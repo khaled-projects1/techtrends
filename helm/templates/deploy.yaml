@@ -39,4 +39,4 @@ spec:
             initialDelaySeconds: 3
             periodSeconds: 10
       imagePullSecrets:
-         - name: mydockerhubsecret-{{ .Values.namespace.name }}
+        - name: mydockerhubsecret-{{ .Values.namespace.name }}  # Replace with your actual secret name
