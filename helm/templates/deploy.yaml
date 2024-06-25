@@ -38,9 +38,5 @@ spec:
               port: {{ .Values.readinessProbe.port }}
             initialDelaySeconds: 3
             periodSeconds: 10
-          env:
-            - name: MY_NAMESPACE
-              value: "{{ .Values.namespace.name }}"  # Inject namespace as environment variable
-          imagePullSecrets:
-            - name: docker-registry-secret
+          
 
