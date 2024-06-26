@@ -116,6 +116,22 @@ def metrics():
     return jsonify(db_connection_count=db_connection_count, post_count=post_count), 200
 
 
+@app.route('/readyz', methods=['GET'])
+def readiness():
+    try:
+        # Check if the database is reachable
+        connection = get_db_connection()
+        connection.execute('SELECT 1')
+        connection.close()
+        app.logger.info('Readiness check passed.')
+        return jsonify(result="OK - ready"), 200
+    except Exception as e:
+        app.logger.error('Readiness check failed.')
+        return jsonify(result="Error - not ready"), 500
+
+
 # Start the application on port 3111
 if __name__ == "__main__":
    app.run(host='0.0.0.0', port='3111')
+   
+
