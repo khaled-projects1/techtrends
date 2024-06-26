@@ -6,8 +6,8 @@ spec:
   project: default
   source:
     repoURL: https://github.com/khaled-projects1/techtrends.git
-    targetRevision: main
-    path: charts/techtrends
+    targetRevision: HEAD
+    path: helm
     helm:
       valueFiles:
         - values-prod.yaml

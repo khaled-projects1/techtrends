@@ -4,13 +4,15 @@ from werkzeug.exceptions import abort
 import logging
 from logging.handlers import RotatingFileHandler
 
+
 # Global variable to keep track of the number of database connections
 db_connection_count = 0
+
 
 # Function to configure logging
 def setup_logging():
     formatter = logging.Formatter('%(asctime)s %(levelname)s: %(message)s')
-    
+
     # STDOUT handler
     stream_handler = logging.StreamHandler()
     stream_handler.setFormatter(formatter)
@@ -25,6 +27,7 @@ def setup_logging():
 
     app.logger.setLevel(logging.INFO)
 
+
 # Function to get a database connection.
 # This function connects to database with the name `database.db`
 def get_db_connection():
@@ -34,6 +37,7 @@ def get_db_connection():
     db_connection_count += 1
     return connection
 
+
 # Function to get a post using its ID
 def get_post(post_id):
     connection = get_db_connection()
@@ -42,12 +46,15 @@ def get_post(post_id):
     connection.close()
     return post
 
+
 # Define the Flask application
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your secret key'
 
+
 # Configure logging
 setup_logging()
+
 
 # Define the main route of the web application 
 @app.route('/')
@@ -57,6 +64,7 @@ def index():
     posts = connection.execute('SELECT * FROM posts').fetchall()
     connection.close()
     return render_template('index.html', posts=posts)
+
 
 # Define how each individual article is rendered 
 # If the post ID is not found a 404 page is shown
@@ -69,6 +77,7 @@ def post(post_id):
     else:
         app.logger.info(f'Article "{post["title"]}" retrieved.')
         return render_template('post.html', post=post)
+
 
 # Define the About Us page
 @app.route('/about')
@@ -114,6 +123,20 @@ def metrics():
     connection.close()
     app.logger.info('Metrics accessed.')
     return jsonify(db_connection_count=db_connection_count, post_count=post_count), 200
+
+
+@app.route('/readyz', methods=['GET'])
+def readiness():
+    try:
+        # Check if the database is reachable
+        connection = get_db_connection()
+        connection.execute('SELECT 1')
+        connection.close()
+        app.logger.info('Readiness check passed.')
+        return jsonify(result="OK - ready"), 200
+    except Exception as e:
+        app.logger.error('Readiness check failed.')
+        return jsonify(result="Error - not ready"), 500
 
 
 # Start the application on port 3111
