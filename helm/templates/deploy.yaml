@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "techtrends.fullname" . }}
+  name: techtrends-{{ .Values.namespace.name }}
   namespace: {{ .Values.namespace.name }}
 spec:
   replicas: {{ .Values.replicaCount }}
@@ -38,3 +38,5 @@ spec:
               port: {{ .Values.readinessProbe.port }}
             initialDelaySeconds: 3
             periodSeconds: 10
+      imagePullSecrets:
+        - name: mydockerhubsecret-{{ .Values.namespace.name }}  # Replace with your actual secret name
