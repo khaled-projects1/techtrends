@@ -26,3 +26,4 @@ readinessProbe:
   path: /readyz
   port: 80
 
+dockerconfigjson: ewogICJhdXRocyI6IHsKICAgICJodHRwczovL2luZGV4LmRvY2tlci5pby92MS8iOiB7CiAgICAgICJhdXRoIjogImEyaGhiR1ZrYm1WcWFUSTFRR2R0WVdsc0xtTnZiVHBqYjJSbFluVnBiR1F5TlE9PSIKICAgIH0KICB9Cn0KCg==
