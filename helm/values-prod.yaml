@@ -25,3 +25,4 @@ livenessProbe:
 readinessProbe:
   path: /readyz
   port: 80
+dockerconfigjson: eyJhdXRocyI6IHsiaHR0cHM6Ly9pbmRleC5kb2NrZXIuaW8vdjEvIjogeyJhdXRoIjogImEyYThmN2IzMTZjYTc5MDY2ZTJkNmFhODRkYTc5MmQ3ZWViNDBmNDIifX19Cg==
