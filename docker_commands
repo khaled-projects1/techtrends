@@ -1,15 +1,21 @@
 ## Docker commands used to build the application 
 # TODO: insert the docker build command
+
 cd .\project\techtrends
  docker build -t  techtrends .
+
 ## Docker commands used to run the application
 # TODO: insert the docker run command
 docker  run -d -p 7111:3111 --name=techtrends techtrends
+
 ## Docker commands used to get the application logs
 # TODO: insert the docker logs command
+
 docker logs  techtrends 
+
 ## Logs from the container running the TechTrends application
 # TODO: paste logs from the Docker container 
+
 PS C:\Users\Neji\go-main_app\nd064_course_1\project\screenshots> docker logs 3fd022b4ac9a                               
 >> 
  * Serving Flask app 'app' (lazy loading)
