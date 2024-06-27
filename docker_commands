@@ -6,6 +6,7 @@ cd .\project\techtrends
 
 ## Docker commands used to run the application
 # TODO: insert the docker run command
+
 docker  run -d -p 7111:3111 --name=techtrends techtrends
 
 ## Docker commands used to get the application logs
